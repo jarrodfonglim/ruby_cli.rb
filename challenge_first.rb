@@ -75,13 +75,14 @@ require 'colorize'
   def generate_table_rows(details)
       table_rows = []
       @details.each do |detail|
+        color = :blue
         if detail[4] <= 14
-          table_rows.push [detail[0], detail[1], detail[2], detail[3], detail[4].to_s.colorize(:red)]
-        elsif detail[4] > 14 && detail[4] <= 30
-          table_rows.push [detail[0], detail[1], detail[2], detail[3], detail[4].to_s.colorize(:yellow)]
-        else
-          table_rows.push [detail[0], detail[1], detail[2], detail[3], detail[4].to_s.colorize(:blue)]
+          color = :red
+        elsif detail[4] <= 30
+          color = :yellow
         end
+
+        table_rows.push [detail[0], detail[1], detail[2], detail[3], detail[4].to_s.colorize(color)]
       end
         return table_rows.sort_by {|a,b,c,d,e| e}
     end
